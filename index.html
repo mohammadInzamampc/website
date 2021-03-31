@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Embedded Example
+  </title>
+</head>
+
+<body>
+  <style>
+    body {
+      background-color: rgb(248, 246, 142);
+    }
+  </style>
+  <h1>Hello world</h1>
+
+  <div id="root"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+
+    axios.get('http://localhost:3000/getfiles')
+      .then(function (response) {
+        // handle success
+        console.log(response.data.cssfiles);
+        const jsfiles = response.data.jsfiles;
+        const cssfiles = response.data.cssfiles;
+
+        elements = jsfiles.map(eachFileName => {
+          var script = document.createElement('script');
+          script.src = `http://localhost:3000/static/js/${eachFileName}`;
+          document.head.appendChild(script)
+          return script;
+        })
+        elements = cssfiles.map(eachFileName => {
+          var link = document.createElement('link');
+          link.rel = `stylesheet`;
+          link.href = `http://localhost:3000/static/css/${eachFileName}`;
+          document.head.appendChild(link)
+          return link;
+        })
+        console.log("elements: ", elements)
+
+      })
+  </script>
+
+
+  <script src="http://localhost:3000/static/js/2.30a59ad9.chunk.js" crossorigin></script>
+  <!-- <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="http://localhost:8080/dist/bundle.js"></script> -->
+
+
+
+
+</body>
+
+</html>
