@@ -23,23 +23,24 @@
 
   <script>
 
-    axios.get('http://localhost:3000/getfiles')
+    axios.get('http://localhost:5000/getfiles')
       .then(function (response) {
-        // handle success
+
         console.log(response.data.cssfiles);
+
         const jsfiles = response.data.jsfiles;
         const cssfiles = response.data.cssfiles;
 
         elements = jsfiles.map(eachFileName => {
           var script = document.createElement('script');
-          script.src = `http://localhost:3000/static/js/${eachFileName}`;
+          script.src = `http://localhost:5000/static/js/${eachFileName}`;
           document.head.appendChild(script)
           return script;
         })
         elements = cssfiles.map(eachFileName => {
           var link = document.createElement('link');
           link.rel = `stylesheet`;
-          link.href = `http://localhost:3000/static/css/${eachFileName}`;
+          link.href = `http://localhost:5000/static/css/${eachFileName}`;
           document.head.appendChild(link)
           return link;
         })
@@ -49,7 +50,7 @@
   </script>
 
 
-  <script src="http://localhost:3000/static/js/2.30a59ad9.chunk.js" crossorigin></script>
+  <!-- <script src="http://localhost:5000/static/js/2.30a59ad9.chunk.js" crossorigin></script> -->
   <!-- <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="http://localhost:8080/dist/bundle.js"></script> -->
